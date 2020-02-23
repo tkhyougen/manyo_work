@@ -10,7 +10,7 @@ Task
   user_id
   name:string
   detail:text  :null
-  due:string  :null
-  priority:string  :null
-  status:string   :null
+  due:date  :null
+  priority:integer  :null
+  status:integer   :null
   label:string   :null

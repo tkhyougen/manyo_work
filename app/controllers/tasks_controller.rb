@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all.order(created_at::desc)
+    @tasks = Task.all
   end
 
   def show
@@ -18,7 +18,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.new(task_params)
     if @task.save
-      redirect_to tasks_path, notice: 'Taskが作られました'
+      redirect_to @task, notice: 'Taskが作られました'
     else
       render :new
     end
@@ -49,7 +49,7 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.require(:task).permit(:name, :detail, :due ,:priority, :status, :label)
+      params.require(:task).permit(:name, :detail, :due,:priority, :status, :label)
     end
 
 end

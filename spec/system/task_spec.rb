@@ -11,6 +11,15 @@ RSpec.describe 'タスク一覧画面', type: :system do
       end
     end
   end
+
+    context '複数のタスクを作成した場合' do
+      it 'タスクが作成日時の降順に並んでいること' do
+        # 省略
+      end
+    end
+
+
+
   describe 'タスク登録画面' do
     context '必要項目を入力して、createボタンを押した場合' do
       it 'データが保存されること'do

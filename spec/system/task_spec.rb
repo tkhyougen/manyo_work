@@ -1,20 +1,29 @@
 require 'rails_helper'
 RSpec.describe 'タスク一覧画面', type: :system do
+  before do
+    @task = FactoryBot.create(:task, name: "task")
+
+  end
+
   describe 'タスク一覧画面' do
     context 'タスクを作成した場合' do
       it '作成済みのタスクが表示されること'do
-         task = FactoryBot.create(:task, name:"111")
          visit tasks_path
          current_path
          Task.count
-         expect(page).to have_content "111"
+         expect(page).to have_content "task"
       end
     end
   end
 
     context '複数のタスクを作成した場合' do
       it 'タスクが作成日時の降順に並んでいること' do
-        # 省略
+
+        new_task = Factory.create(:task, name:"new_task")
+        visit tasks_path
+        task_list = all(".task_row")
+        expect(task_list[0]).to have content "new_task"
+        expect(task_list[0]).to have content "task"
       end
     end
 

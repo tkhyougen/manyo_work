@@ -27,3 +27,8 @@ Herokuへのデプロイ
   $  heroku buildpacks:add --index 1 heroku/nodejs
 
   $ git push heroku master
+
+  $ heroku run rails db:migrate
+
+  $ heroku config
+  heroku自動デプロイ設定

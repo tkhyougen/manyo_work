@@ -1,7 +1,7 @@
 require 'rails_helper'
 RSpec.describe 'タスク一覧画面', type: :system do
   before do
-    @task = FactoryBot.create(:task, name: "task")
+    FactoryBot.create(:task, name:"aaa",detail:"aaaa")
 
   end
 
@@ -11,19 +11,18 @@ RSpec.describe 'タスク一覧画面', type: :system do
          visit tasks_path
          current_path
          Task.count
-         expect(page).to have_content "task"
+         expect(page).to have_content "aaa"
       end
     end
   end
 
     context '複数のタスクを作成した場合' do
       it 'タスクが作成日時の降順に並んでいること' do
-
-        new_task = Factory.create(:task, name:"new_task")
+        FactoryBot.create(:second_task, name:"bbb",detail:"bbbb")
         visit tasks_path
-        task_list = all(".task_row")
-        expect(task_list[0]).to have content "new_task"
-        expect(task_list[0]).to have content "task"
+        task_list = page.all("td")
+        expect(task_list[0]).to have_content "bbb"
+        expect(task_list[1]).to have_content "bbbb"
       end
     end
 
@@ -37,7 +36,7 @@ RSpec.describe 'タスク一覧画面', type: :system do
          # 「タスク名」というラベル名の入力欄と、「タスク詳細」というラベル名の入力欄に
          # タスクのタイトルと内容をそれぞれfill_in（入力）する
          fill_in "task[name]", with: "222 タスク名"
-         fill_in "task[detail]" ,with: "222 内容"
+         fill_in "task[detail]",with: "222 内容"
          click_on "登録する"
           #（タスクが登録されたらタスク詳細画面に遷移されるという前提）
          expect(page).to have_content("222 タスク名")

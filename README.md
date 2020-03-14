@@ -16,19 +16,21 @@ Task
   label:string   
 
 
-Herokuへのデプロイ
+#Herokuへのデプロイ
 
-　アセットプリコンパイルを行う
-  $ rails assets:precompile RAILS_ENV=production
-  masterへpush
-  $ git add -A
-  $ git commit -m "test commit"
+##アセットプリコンパイルを行う
+'$ rails assets:precompile RAILS_ENV=production'
 
-  $  heroku buildpacks:add --index 1 heroku/nodejs
+##Masterへpush
+'$ git add -A'
+'$ git commit -m "test commit" '
+'$ git push heroku master'
 
-  $ git push heroku master
+### エラーが出た場合
+'$  heroku buildpacks:add --index 1 heroku/nodejs'
 
-  $ heroku run rails db:migrate
+##データベースMigrate
+'$ heroku run rails db:migrate'
 
-  $ heroku config
-  heroku自動デプロイ設定
+###アドレス確認
+'$ heroku config'

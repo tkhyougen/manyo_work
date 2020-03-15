@@ -45,3 +45,6 @@ Task
 `$ heroku config`
 ### GithubにPushしたら自動デプロイについて
 https://reasonable-code.com/github-push-heroku/
+### ローカルを最新に
+`git checkout master`
+`git pull origin master`

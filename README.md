@@ -22,7 +22,7 @@ Task
 
 ## Masterへpush
 `$ git add -A`
-`$ git commit -m "test commit" `
+`$ git commit -m "test commit"`  
 `$ git push origin ブランチ名or master `
 
 ## Herokuにて新しくアプリ作成 (初回)
@@ -30,21 +30,21 @@ Task
 
 ## git hub　マージ
 `git hub上にてプルリクエスト、OKならmasterへ
-マージ``
+マージ`
 
-##Heokuへのデプロイ
+## Heokuへのデプロイ
 `$ git push heroku master `
 
 ## データベース移行(データベースの移行　マイグレーション必要な場合)
 `$ heroku run rails db:migrate`
 
 ### 以下参考
-### エラーが出た場合
+#### エラーが出た場合
 `$  heroku buildpacks:add --index 1 heroku/nodejs`
-### アドレス確認
+#### アドレス確認
 `$ heroku config`
-### GithubにPushしたら自動デプロイについて
+#### GithubにPushしたら自動デプロイについて
 https://reasonable-code.com/github-push-heroku/
-### ローカルを最新に
+#### ローカルを最新に
 `git checkout master`
 `git pull origin master`

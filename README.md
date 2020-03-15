@@ -19,19 +19,29 @@ Task
 
 # Herokuへのデプロイ
 
-## アセットプリコンパイルを行う
-`$ rails assets:precompile RAILS_ENV=production'`
 
 ## Masterへpush
 `$ git add -A`
 `$ git commit -m "test commit" `
-`$ git push heroku master`
+`$ git push origin ブランチ名or master `
 
-### エラーが出た場合
-`$  heroku buildpacks:add --index 1 heroku/nodejs`
+## Herokuにて新しくアプリ作成 (初回)
+`$ heroku create `
 
-## データベースMigrate
+## git hub　マージ
+`git hub上にてプルリクエスト、OKならmasterへ
+マージ``
+
+##Heokuへのデプロイ
+`$ git push heroku master `
+
+## データベース移行(データベースの移行　マイグレーション必要な場合)
 `$ heroku run rails db:migrate`
 
+### 以下参考
+### エラーが出た場合
+`$  heroku buildpacks:add --index 1 heroku/nodejs`
 ### アドレス確認
 `$ heroku config`
+### GithubにPushしたら自動デプロイについて
+https://reasonable-code.com/github-push-heroku/

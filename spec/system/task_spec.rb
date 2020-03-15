@@ -20,13 +20,11 @@ RSpec.describe 'タスク一覧画面', type: :system do
       it 'タスクが作成日時の降順に並んでいること' do
         FactoryBot.create(:second_task, name:"bbb",detail:"bbbb")
         visit tasks_path
-        task_list = page.all("td")
+        task_list = all(".narabi")
         expect(task_list[0]).to have_content "bbb"
-        expect(task_list[1]).to have_content "bbbb"
+        expect(task_list[1]).to have_content "aaa"
       end
     end
-
-
 
   describe 'タスク登録画面' do
     context '必要項目を入力して、createボタンを押した場合' do

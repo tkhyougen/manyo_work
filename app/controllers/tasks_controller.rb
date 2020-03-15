@@ -2,11 +2,16 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    if params[:sort_expired] == true
-      @tasks = Task.all.order(due:"DESC")
-    else
-      @tasks = Task.all.order(created_at:"DESC")
-    end
+    # @q = Task.ransack(params[:q])
+    # @tasks = @q.result(distinct: true)
+    #
+      if params[:sort_expired_dsc]
+        @tasks = Task.all.order(due:"DESC")
+      elsif params[:sort_expired_asc]
+        @tasks = Task.all.order(due:"ASC")
+      else
+        @tasks = Task.all.order(created_at:"DESC")
+      end
   end
 
   def show
@@ -55,5 +60,4 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:name, :detail, :due,:priority, :status, :label)
     end
-
 end

@@ -37,8 +37,12 @@
   </div>
 
   <div class="status">
-    <%= form.label :状況 %>
-    <%= form.text_field :status, class:"form-control" %>
+    <%= form.label :ステータス %>
+    <%= form.select :status,
+    {未着手:"未着手",
+    着手中:"着手中",
+    完了:"完了"
+    }%>
   </div>
 
 

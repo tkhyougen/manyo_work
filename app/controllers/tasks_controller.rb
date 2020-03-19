@@ -1,17 +1,36 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
+  PER = 5
+  
   def index
     # @q = Task.ransack(params[:q])
     # @tasks = @q.result(distinct: true)
     #
-      if params[:sort_expired_dsc]
-        @tasks = Task.all.order(due:"DESC")
-      elsif params[:sort_expired_asc]
-        @tasks = Task.all.order(due:"ASC")
-      else
-        @tasks = Task.all.order(created_at:"DESC")
-      end
+
+    @tasks = Task.all.order(created_at:"DESC")
+
+    #終了期限で昇降ソート
+    if params[:sort_expired_dsc]
+      @tasks = Task.all.order(due:"DESC")
+    elsif params[:sort_expired_asc]
+      @tasks = Task.all.order(due:"ASC")
+    else
+      @tasks = Task.all.order(created_at:"DESC")
+    end
+
+    #優先度でソート
+    if params[:sort_priority_high]
+      @tasks = Task.all.order(priority:"ASC")
+    end
+
+    #検索　タスクとステータス
+    if params[:task]&& params[:task][:search].present?
+      @tasks = Task.where("name Like ?", "%#{params[:task][:name]}%")
+      @tasks = @tasks.where("status Like ?","%#{params[:task][:status]}%")
+    end
+
+    @tasks = @tasks.page(params[:page]).per(PER)
   end
 
   def show

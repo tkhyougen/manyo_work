@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>タスク一覧</h1>
+<h1><%= link_to "タスク一覧", tasks_path %></h1>
 
 <% if params[:sort_expired_dsc]%>
   <%= link_to "終了期限で昇順", tasks_path(sort_expired_asc:true) %>
@@ -10,9 +10,16 @@
   <%= link_to "終了期限で降順", tasks_path(sort_expired_dsc:true) %>
 <% end %>
 
-<%= form_with(url:tasks_path, local: true, method: :get) do |form| %>
-  <%= form.label name="タスクで検索" %>
-  <%= form.text_field :search %>
+<%= link_to "優先度高い順でソートする", tasks_path(sort_priority_high:true) %>
+
+
+<%= form_with(model:Task.new, url:tasks_path, local: true, method: :get) do |form| %>
+  <%= form.label :search, "タスクで検索" %>
+  <%= form.text_field :name, class: "form-control" %>
+  <%= form.label :status_search, "ステータスで絞込" %>
+  <%= form.select :status, ["未着手","着手中","完了"],{include_blank:"選択する"}, class:"simple" %>
+
+  <%= form.hidden_field :search, value:"true" %>
   <%= form.submit name="検索する" %>
 <% end %>
 
@@ -25,6 +32,7 @@
       <th>&nbsp;&nbsp;</th>
       <th>期限</th>
       <th>&nbsp;&nbsp;</th>
+      <th>優先度  </th>
       <th>ステータス </th>
 
     </tr>
@@ -39,6 +47,7 @@
         <td>&nbsp;</td>
         <td><%= task.due %></td>
         <td>&nbsp;</td>
+        <td><%= task.priority %></td>
         <td><%= task.status %> </td>
         <td><%= link_to 'Show', task_path(task), class:"btn btn-primary mr-3" %></td>
         <td><%= link_to 'Edit', edit_task_path(task), class: "btn btn-success"%></td>
@@ -49,5 +58,7 @@
 </table>
 
 <br>
+<%= paginate @tasks %>
+<br />
 
 <%= link_to '新規タスク登録', new_task_path, class: "btn btn-default" %>

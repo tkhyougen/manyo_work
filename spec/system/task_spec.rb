@@ -1,7 +1,7 @@
 require 'rails_helper'
 RSpec.describe 'タスク一覧画面', type: :system do
   before do
-    FactoryBot.create(:task, name:"aaa",detail:"aaaa")
+    FactoryBot.create(:task, name:"aaa",detail:"aaaa",priority:0)
 
   end
 
@@ -53,4 +53,31 @@ RSpec.describe 'タスク一覧画面', type: :system do
         end
      end
   end
+
+  describe 'タスク一覧画面' do
+    context '終了期限でソートするを押した場合' do
+      it '降順でソート'do
+         visit tasks_path
+         click_on "終了期限で降順"
+         task_list = all(".narabi")
+         expect(task_list[0]).to have_content "2020"
+      end
+    end
+
+
+    context '優先度高い順ででソートするを押した場合' do
+      it '優先度高い順順でソート'do
+        FactoryBot.create(:second_task, name:"bbb",detail:"bbbb",priority:2)
+        visit tasks_path
+        click_on "優先度高い順でソートする"
+        task_list = all(".narabi")
+        expect(task_list[0]).to have_content "高"
+      end
+    end
+
+  end
+
+
+
+
 end

@@ -1,4 +1,4 @@
-# 
+#
 # 5.times do |n|
 #
 #   2.times do |n|
@@ -11,3 +11,13 @@
 #                  due: due
 #                  )
 #   end
+
+1.times do |n|
+  name = Faker::Games::Pokemon.name
+  email = Faker::Internet.email
+  password = "password"
+  User.create!(name: name,
+                email: email,
+              password_digest: password
+              )
+end

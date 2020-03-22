@@ -54,7 +54,7 @@ Task
 `$  heroku buildpacks:add --index 1 heroku/nodejs`
 #### アドレス確認
 `$ heroku config`
-https://アプリ名.herokuapp.com/
+https://damp-atoll-65761.herokuapp.com/
 #### GithubにPushしたら自動デプロイについて
 https://reasonable-code.com/github-push-heroku/
 #### masterにマージしたらローカルを最新masterに

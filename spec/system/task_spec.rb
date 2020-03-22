@@ -66,7 +66,7 @@ RSpec.describe 'タスク一覧画面', type: :system do
     end
 
 
-    context '優先度高い順ででソートするを押した場合' do
+    context '優先度高い順でソートするを押した場合' do
       it '優先度高い順でソート'do
         FactoryBot.create(:second_task, name:"bbb",detail:"bbbb",priority:1)
         visit tasks_path

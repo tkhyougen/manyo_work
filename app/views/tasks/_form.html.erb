@@ -10,40 +10,42 @@
   </div>
 <% end %>
 
-<%= form_with(model: @task, local: true) do |form| %>
-  <div class="field">
-    <%= form.label :タスク名 %>
-    <%= form.text_field :name, class:"form-control" %>
-  </div>
 
-  <div class="detail">
-    <%= form.label :内容 %>
-    <%= form.text_area :detail, class:"form-control" %>
-  </div>
-
-  <div class="due">
-    <%= form.label :期限 %>
-    <%= form.date_select :due, class:"form-control" %>
-  </div>
-
-  <div class="priority">
-    <%= form.label :優先度 %>
-    <%= form.select :priority, Task.priorities.keys.map{ |k| [k, k] } %>
+<div class="format">
 
 
-  </div>
+  <%= form_with(model: @task, local: true) do |form| %>
+    <div class="field">
+      <%= form.label :タスク名 %>
+      <%= form.text_field :name, class:"form-control" %>
+    </div>
 
-  <div class="status">
-    <%= form.label :ステータス %>
-    <%= form.select :status,
-     {未着手:"未着手",
-    着手中:"着手中",
-    完了:"完了"
-    }%>
-  </div>
+    <div class="detail">
+      <%= form.label :内容 %>
+      <%= form.text_area :detail, class:"form-control" %>
+    </div>
 
+    <div class="due">
+      <%= form.label :期限 %>
+      <%= form.date_select :due, class:"form-control" %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit name="登録する", class: "btn-primary" %>
-  </div>
-<% end %>
+    <div class="priority">
+      <%= form.label :優先度 %>
+      <%= form.select :priority, Task.priorities.keys.map{ |k| [k, k] } %>
+    </div>
+
+    <div class="status">
+      <%= form.label :ステータス %>
+      <%= form.select :status,
+       {未着手:"未着手",
+      着手中:"着手中",
+      完了:"完了"
+      }%>
+    </div>
+
+    <div class="actions">
+      <%= form.submit name="登録する", class: "btn-primary" %>
+    </div>
+  <% end %>
+</div>

@@ -9,7 +9,33 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload'  %>
   </head>
 
+  <header>
+    <nav class="navbar navbar-default navbar-fixed-top .justify-content-center" style="background-color: #e3f2fd;">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <h1><%= link_to "タスク管理アプリ", tasks_path, :style=>"color:black" %></h1>
+        </div>
+      </div>
+    </nav>
+  </header>
+
   <body>
     <%= yield %>
   </body>
+
+
+  <!--footer-->
+  <footer>
+    <nav class="navbar navbar-default navbar-fixed-bottom">
+      <div class="fixed-bottom">
+        <div class="footer-logo">
+          <p>DIC 万葉社課題  </p>
+        </div>
+        <div class="footer_myname">
+          <p>WEP1908 TomohikoKobayashi  </p>
+        </div>
+      </div>
+    </nav>
+  </footer>
+
 </html>

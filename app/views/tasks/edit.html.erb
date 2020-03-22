@@ -1,6 +1,8 @@
-<h1>編集</h1>
+<h2>編集する</h2>
 
 <%= render 'form', task: @task %>
 
-<%= link_to 'Show', @task %>
-<%= link_to 'Back', tasks_path %>
+<div class="button">
+  <%= link_to '詳細', @task %> |
+  <%= link_to '戻る', tasks_path %>
+</div>

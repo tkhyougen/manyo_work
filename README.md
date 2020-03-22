@@ -1,11 +1,6 @@
-検索のロジックが書けたら、それをコントローラからモデルに移して（scopeにして）、その記述に対するmodelのテストを追加してみましょう（system specも追記しておきましょう）
-タスクに対して、優先順位（高中低）を登録できるようにしよう。
-優先順位で高い順にソートできるようにしましょう。
-KaminariというGemを使って一覧画面にページネーションを追加しましょう。
-Bootstrapを導入して、これまで作成したアプリにデザインを当てましょう。
+
 GitHub上でPRを作成してレビューしてもらいましょう。
 終了期限のテストをsystem specで追記しましょう。
-バリデーションにmodelのテストを追加してみましょう。
 検索ロジックのmodelのテストを追加してみましょう。
 ステータスのテストをsystem specで追記しましょう。
 Bootstrap導入後のテストが落ちないか確認しましょう。
@@ -59,8 +54,9 @@ Task
 `$  heroku buildpacks:add --index 1 heroku/nodejs`
 #### アドレス確認
 `$ heroku config`
+https://アプリ名.herokuapp.com/
 #### GithubにPushしたら自動デプロイについて
 https://reasonable-code.com/github-push-heroku/
-#### ローカルを最新に
+#### masterにマージしたらローカルを最新masterに
 `git checkout master`
 `git pull origin master`

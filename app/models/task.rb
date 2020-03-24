@@ -3,4 +3,5 @@ class Task < ApplicationRecord
   validates :detail, presence: true
   validates :due, presence: true
   enum priority: {高:0, 中:1, 低:2}
+  # belongs_to :user
 end

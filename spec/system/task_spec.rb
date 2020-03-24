@@ -61,6 +61,7 @@ RSpec.describe 'タスク一覧画面', type: :system do
         visit tasks_path
         click_on "終了期限で降順にソート"
         task_list = all(".narabi")
+        sleep 0.5
         expect(task_list[0]).to have_content "2020"
       end
     end
@@ -72,6 +73,7 @@ RSpec.describe 'タスク一覧画面', type: :system do
         visit tasks_path
         click_on "優先度高い順でソート"
         task_list = all(".narabi")
+        sleep 0.5
         expect(task_list[0]).to have_content "高"
       end
     end

@@ -1,13 +1,5 @@
-
-GitHub上でPRを作成してレビューしてもらいましょう。
-終了期限のテストをsystem specで追記しましょう。
-検索ロジックのmodelのテストを追加してみましょう。
-ステータスのテストをsystem specで追記しましょう。
-Bootstrap導入後のテストが落ちないか確認しましょう。
-【+α要件】自分で調べて、Basic認証を入れてみましょう。
-【+α要件】さらに自分でCSSやJavaScriptを書いて高度なデザインを付けましょう。
-デバック・Kaminari・bootstrap・jquery-rails以外のgemは追加していないこと
-
+  ## belongs_to :user
+  
 
 User
   id

@@ -2,12 +2,10 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   PER = 5
-  
+
   def index
     # @q = Task.ransack(params[:q])
     # @tasks = @q.result(distinct: true)
-    #
-
     @tasks = Task.all.order(created_at:"DESC")
 
     #終了期限で昇降ソート
@@ -25,9 +23,15 @@ class TasksController < ApplicationController
     end
 
     #検索　タスクとステータス
-    if params[:task]&& params[:task][:search].present?
-      @tasks = Task.where("name Like ?", "%#{params[:task][:name]}%")
-      @tasks = @tasks.where("status Like ?","%#{params[:task][:status]}%")
+    if params[:search].present?
+      if params[:search][:name].present? && params[:search][:status].present?
+        @tasks = Task.where("name Like ?", "%#{params[:search][:name]}%")
+        @tasks = @tasks.where(status: params[:search][:status])
+      elsif params[:search][:name].present?
+        @tasks = Task.where("name Like ?", "%#{params[:search][:name]}%")
+      elsif params[:search][:status].present?
+        @tasks = @tasks.where(status: params[:search][:status])
+      end
     end
 
     @tasks = @tasks.page(params[:page]).per(PER)
@@ -66,8 +70,6 @@ class TasksController < ApplicationController
     @task.destroy
     redirect_to tasks_path, notice:"#{@task.name}を削除しました！"
   end
-
-
 
 
   private

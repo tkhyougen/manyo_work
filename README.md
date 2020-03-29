@@ -1,4 +1,3 @@
-  ## belongs_to :user
 
 
 User

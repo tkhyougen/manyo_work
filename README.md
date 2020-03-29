@@ -1,5 +1,5 @@
   ## belongs_to :user
-  
+
 
 User
   id
@@ -20,9 +20,11 @@ Task
 
 
 
+
+
 # Herokuへのデプロイ
 
-
+##yarn install （必要であれば）
 ## Masterへpush
 `$ git add -A`
 `$ git commit -m "test commit"`  

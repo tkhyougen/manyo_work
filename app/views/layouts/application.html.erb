@@ -16,6 +16,17 @@
         <div class="navbar-header">
           <h4><%= link_to "タスク管理アプリ", tasks_path, :style=>"color:black" %></h4>
         </div>
+        <div calss="navbar-header_right">
+
+        <% if logged_in? %>
+          <%= link_to "Profile", user_path(current_user.id) %>
+          <%= link_to "Logout", session_path(current_user.id), method::delete %>
+        <% else %>
+        　<%= link_to "Sign up", new_user_path %>
+          <%= link_to "Login", new_session_path %>
+        <% end %>
+        </div>
+
       </div>
     </nav>
   </header>

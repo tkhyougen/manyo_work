@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :check_user, only: [:index]
 
   PER = 5
 
@@ -49,6 +50,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    # @task.user_id = current_user.id
     if @task.save
       redirect_to @task, notice: 'Taskが作られました'
     else
@@ -80,5 +82,13 @@ class TasksController < ApplicationController
 
     def task_params
       params.require(:task).permit(:name, :detail, :due,:priority, :status, :label)
+    end
+
+    def check_user
+        # @task = Task.find(params[:id])
+        # unless current_user == true
+        #   flash[:notice] = "ログインしてください"
+        #   redirect_to new_session_path
+        # end
     end
 end

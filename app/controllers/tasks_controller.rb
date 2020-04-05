@@ -86,7 +86,7 @@ class TasksController < ApplicationController
     end
 
     def check_user
-        # unless logged_in? == true
+        # unless logged_in?
         #     flash[:notice] = "ログインしてください"
         #     redirect_to new_session_path, notice:"ログインしてください"
         # end

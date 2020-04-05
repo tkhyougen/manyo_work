@@ -7,9 +7,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-        @user && @user.authenticate(params[:password])
-        session[:user_id] = @user.id
-        redirect_to user_path(@user.id), notice:"ログインしました"
+      @user && @user.authenticate(params[:password])
+      session[:user_id] = @user.id
+      redirect_to user_path(@user.id), notice:"ログインしました"
     else
       render :new
     end
@@ -19,7 +19,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-# ============
   private
 
   def user_params

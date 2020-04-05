@@ -5,6 +5,7 @@ class TasksController < ApplicationController
   PER = 5
 
   def index
+
     # @q = Task.ransack(params[:q])
     # @tasks = @q.result(distinct: true)
     @tasks = Task.all.order(created_at:"DESC")
@@ -90,5 +91,9 @@ class TasksController < ApplicationController
         #   flash[:notice] = "ログインしてください"
         #   redirect_to new_session_path
         # end
+        unless logged_in? == true
+            flash[:notice] = "ログインしてください"
+            redirect_to new_session_path, notice:"ログインしてください"
+        end
     end
 end

@@ -7,7 +7,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to user_path(@user.id)
+
+        @user && @user.authenticate(params[:password])
+        session[:user_id] = @user.id
+        redirect_to user_path(@user.id), notice:"ログインしました"
+
     else
       render :new
     end
@@ -16,7 +20,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
   end
-
 
 
   private

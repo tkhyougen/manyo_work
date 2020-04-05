@@ -86,14 +86,9 @@ class TasksController < ApplicationController
     end
 
     def check_user
-        # @task = Task.find(params[:id])
-        # unless current_user == true
-        #   flash[:notice] = "ログインしてください"
-        #   redirect_to new_session_path
+        # unless logged_in? == true
+        #     flash[:notice] = "ログインしてください"
+        #     redirect_to new_session_path, notice:"ログインしてください"
         # end
-        unless logged_in? == true
-            flash[:notice] = "ログインしてください"
-            redirect_to new_session_path, notice:"ログインしてください"
-        end
     end
 end

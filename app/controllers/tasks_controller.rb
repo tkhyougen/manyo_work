@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   PER = 5
-  
+
   def index
     # @q = Task.ransack(params[:q])
     # @tasks = @q.result(distinct: true)
@@ -68,8 +68,6 @@ class TasksController < ApplicationController
   end
 
 
-
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
@@ -78,5 +76,11 @@ class TasksController < ApplicationController
 
     def task_params
       params.require(:task).permit(:name, :detail, :due,:priority, :status, :label)
+    end
+
+    def check_user
+    unless logged_in?
+        flash[:notice] = "ログインしてください"
+        redirect_to new_session_path, notice:"ログインしてください"
     end
 end

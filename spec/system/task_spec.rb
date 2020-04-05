@@ -61,17 +61,19 @@ RSpec.describe 'タスク一覧画面', type: :system do
         visit tasks_path
         click_on "終了期限で降順にソート"
         task_list = all(".narabi")
+        sleep 1.0
         expect(task_list[0]).to have_content "2020"
       end
     end
 
 
-    context '優先度高い順ででソートするを押した場合' do
+    context '優先度高い順でソートするを押した場合' do
       it '優先度高い順でソート'do
-        FactoryBot.create(:second_task, name:"bbb",detail:"bbbb",priority:1)
+        FactoryBot.create(:second_task, name:"bbb",detail:"bbbb",priority:0)
         visit tasks_path
         click_on "優先度高い順でソート"
         task_list = all(".narabi")
+        sleep 0
         expect(task_list[0]).to have_content "高"
       end
     end

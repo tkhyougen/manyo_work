@@ -47,13 +47,13 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem  "better_errors"
   gem  "binding_of_caller"
+  gem  "brakeman"
 end
 
 group :test do
   gem 'capybara'
   gem "webdrivers"
   gem "selenium-webdriver"
-
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -63,3 +63,5 @@ gem "mini_racer"
 gem "jquery-rails"
 gem "ransack"
 gem "kaminari"
+gem "faker"
+gem "bcrypt", "~>3.1.7"

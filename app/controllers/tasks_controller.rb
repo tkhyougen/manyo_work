@@ -1,13 +1,13 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :check_user, only: [:index]
 
   PER = 5
 
   def index
+
     # @q = Task.ransack(params[:q])
     # @tasks = @q.result(distinct: true)
-    #
-
     @tasks = Task.all.order(created_at:"DESC")
 
     #終了期限で昇降ソート
@@ -25,9 +25,15 @@ class TasksController < ApplicationController
     end
 
     #検索　タスクとステータス
-    if params[:task]&& params[:task][:search].present?
-      @tasks = Task.where("name Like ?", "%#{params[:task][:name]}%")
-      @tasks = @tasks.where("status Like ?","%#{params[:task][:status]}%")
+    if params[:search].present?
+      if params[:search][:name].present? && params[:search][:status].present?
+        @tasks = Task.where("name Like ?", "%#{params[:search][:name]}%")
+        @tasks = @tasks.where(status: params[:search][:status])
+      elsif params[:search][:name].present?
+        @tasks = Task.where("name Like ?", "%#{params[:search][:name]}%")
+      elsif params[:search][:status].present?
+        @tasks = @tasks.where(status: params[:search][:status])
+      end
     end
 
     @tasks = @tasks.page(params[:page]).per(PER)
@@ -45,6 +51,7 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(task_params)
+    # @task.user_id = current_user.id
     if @task.save
       redirect_to @task, notice: 'Taskが作られました'
     else
@@ -79,8 +86,10 @@ class TasksController < ApplicationController
     end
 
     def check_user
-    unless logged_in?
-        flash[:notice] = "ログインしてください"
-        redirect_to new_session_path, notice:"ログインしてください"
+        # unless logged_in?
+        #     flash[:notice] = "ログインしてください"
+        #     redirect_to new_session_path, notice:"ログインしてください"
+        # end
     end
+
 end

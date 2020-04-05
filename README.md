@@ -1,12 +1,11 @@
+<!-- ユーザ登録（create）をした時、同時にログインもさせるようにしましょう -->
+<!-- ログインしていないのにタスク一覧のページに飛ぼうとした場合は、ログインページに遷移させましょう -->
+自分が作成したタスクだけを表示するようにしましょう
+<!-- ログアウト機能を実装しましょう -->
+<!-- 今回は、ユーザの登録（new）画面と、詳細・マイページ（show）画面のみを作成しましょう -->
 
-GitHub上でPRを作成してレビューしてもらいましょう。
-終了期限のテストをsystem specで追記しましょう。
-検索ロジックのmodelのテストを追加してみましょう。
-ステータスのテストをsystem specで追記しましょう。
-Bootstrap導入後のテストが落ちないか確認しましょう。
-【+α要件】自分で調べて、Basic認証を入れてみましょう。
-【+α要件】さらに自分でCSSやJavaScriptを書いて高度なデザインを付けましょう。
-デバック・Kaminari・bootstrap・jquery-rails以外のgemは追加していないこと
+ログインしている時は、ユーザ登録画面（new画面）に行かせないように、コントローラで制御しましょう
+自分（current_user）以外のユーザのマイページ（userのshow画面）にアクセスしたらタスク一覧に遷移させるようにしましょう
 
 
 User
@@ -28,9 +27,11 @@ Task
 
 
 
+
+
 # Herokuへのデプロイ
 
-
+##yarn install （必要であれば）
 ## Masterへpush
 `$ git add -A`
 `$ git commit -m "test commit"`  
@@ -54,7 +55,7 @@ Task
 `$  heroku buildpacks:add --index 1 heroku/nodejs`
 #### アドレス確認
 `$ heroku config`
-https://アプリ名.herokuapp.com/
+https://damp-atoll-65761.herokuapp.com/
 #### GithubにPushしたら自動デプロイについて
 https://reasonable-code.com/github-push-heroku/
 #### masterにマージしたらローカルを最新masterに

@@ -5,10 +5,9 @@ class TasksController < ApplicationController
   PER = 5
 
   def index
-
     # @q = Task.ransack(params[:q])
     # @tasks = @q.result(distinct: true)
-    @tasks = Task.all.order(created_at:"DESC")
+    @tasks = current_user.tasks.order(created_at:"DESC")
 
     #終了期限で昇降ソート
     if params[:sort_expired_dsc]
@@ -36,7 +35,7 @@ class TasksController < ApplicationController
       end
     end
 
-    @tasks = @tasks.page(params[:page]).per(PER)
+    @tasks = current_user.tasks.page(params[:page]).per(PER)
   end
 
   def show
@@ -50,8 +49,8 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
-    # @task.user_id = current_user.id
+    @task = current_user.tasks.new(task_params)
+    @task.user_id = current_user.id
     if @task.save
       redirect_to @task, notice: 'Taskが作られました'
     else
@@ -78,7 +77,7 @@ class TasksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
-      @task = Task.find(params[:id])
+      @task = current_user.tasks.find(params[:id])
     end
 
     def task_params
@@ -86,10 +85,10 @@ class TasksController < ApplicationController
     end
 
     def check_user
-        # unless logged_in?
-        #     flash[:notice] = "ログインしてください"
-        #     redirect_to new_session_path, notice:"ログインしてください"
-        # end
+      unless logged_in?
+        flash[:notice] = "ログインしてください"
+        redirect_to new_session_path, notice:"ログインしてください"
+      end
     end
 
 end

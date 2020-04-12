@@ -35,6 +35,7 @@ class TasksController < ApplicationController
       end
     end
 
+    #見直し
     @tasks = current_user.tasks.page(params[:page]).per(PER)
   end
 

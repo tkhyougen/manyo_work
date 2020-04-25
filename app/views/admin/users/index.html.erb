@@ -11,6 +11,7 @@
         <th scope="col">管理者</th>
         <th scope="col">作成日</th>
         <th scope="col">アップデート日</th>
+        <th scope="col">タスク数</th>
         <th></th>
         <th></th>
         <th></th>
@@ -22,9 +23,10 @@
         <tr class="admin_narabi">
           <td><%= user.name %> </td>
           <td><%= user.email %></td>
-          <td><%= "いいえ" unless user.admin? %></td>
+          <td><%= "〇" if user.admin? %></td>
           <td><%= user.created_at.strftime("%Y-%m-%d%H:%M") %></td>
           <td><%= user.updated_at.strftime("%Y-%m-%d%H:%M") %></td>
+          <td><%= user.tasks.count %> </td>
           <td></td>
           <td><%= link_to '詳細', admin_user_path(user), class:"btn btn-primary mr-3" %></td>
           <td><%= link_to '編集', edit_admin_user_path(user), class: "btn btn-success"%></td>

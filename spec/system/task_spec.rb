@@ -1,7 +1,8 @@
 require 'rails_helper'
 RSpec.describe 'タスク一覧画面', type: :system do
   before do
-    FactoryBot.create(:task, name:"aaa",detail:"aaaa",priority:0)
+    FactoryBot.create(:user)
+    FactoryBot.create(:task, user: user, name:"aaa",detail:"aaaa",priority:0)
 
   end
 

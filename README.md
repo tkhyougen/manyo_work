@@ -1,6 +1,4 @@
 
-
-
 User
   id
   name:string

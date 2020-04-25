@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  before_action :check_admin_user, only: [:new, :index, :show, :edit, :update, :destroy]
 
 PER = 4
 
@@ -40,14 +41,23 @@ PER = 4
 
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    redirect_to admin_users_path, notice:"ユーザー「#{@user.name}」を削除しました"
+    if @user.destroy
+      redirect_to admin_users_path, notice:"ユーザー「#{@user.name}」を削除しました"
+    else
+      redirect_to admin_users_path, notice:"ユーザー「#{@user.name}」は削除できません"
+    end
   end
 
   private
 
   def user_params
     params.require(:user).permit(:name, :email, :admin, :password, :password_confirmation)
+  end
+
+  def check_admin_user
+    unless current_user.admin?
+      redirect_to tasks_path, notice:"あなたは管理者ではありません"
+    end
   end
 
 end

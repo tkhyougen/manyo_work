@@ -15,12 +15,12 @@
   <% end %>
 
   <%= f.label :name %>
-  <%= f.text_field :name, class:"form-control"  %>
+  <%= f.text_field :name, class:"form-control", id:"user_name"  %>
   <%= f.label :email %>
-  <%= f.email_field :email, class:"form-control"  %>
+  <%= f.email_field :email, class:"form-control", id:"user_email"  %>
   <%= f.label :password %>
-  <%= f.password_field :password, class:"form-control"  %>
+  <%= f.password_field :password, class:"form-control", id:"user_password"  %>
   <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation, class:"form-control"  %>
+  <%= f.password_field :password_confirmation, class:"form-control", id:"user_password_confirmation"  %>
   <%= f.submit "登録する" %>
 <% end %>

@@ -2,11 +2,11 @@ class SessionsController < ApplicationController
   before_action :check_user, only: [:new]
 
   def new
-    
   end
 
   def create
-    user = User.find_by(email:params[:session][:email].downcase)
+    user = User.find_by(email: params[:session][:email].downcase)
+    # binding.pry
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
       redirect_to user_path(user.id), notice:"ログインしました"

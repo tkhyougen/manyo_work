@@ -55,7 +55,7 @@ PER = 4
   end
 
   def check_admin_user
-    unless current_user.admin?
+    unless current_user && current_user.admin?
       redirect_to tasks_path, notice:"あなたは管理者ではありません"
     end
   end

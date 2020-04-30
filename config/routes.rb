@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     resources :users
   end
   get "/login", to: "sessions#new"
-  root to: "tasks#index"
+  root to: "sessions#new"
   resources :tasks
   resources :users
   resources :sessions

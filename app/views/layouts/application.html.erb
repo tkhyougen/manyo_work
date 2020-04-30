@@ -17,15 +17,18 @@
           <p id="notice"><%= notice %></p>
           <h4><%= link_to "タスク管理アプリ", tasks_path, :style=>"color:black" %></h4>
         </div>
-        <div calss="navbar-header_right">
-
-        <% if logged_in? %>
-          <%= link_to "Profile", user_path(current_user.id) %>
-          <%= link_to "Logout", session_path(current_user.id), method: :delete, data: { confirm: "ログアウトしますか?" }  %>
-        <% else %>
-        　<%= link_to "Sign up", new_user_path %>
-          <%= link_to "Login", new_session_path %>
-        <% end %>
+        <div class="header_right">
+          <% if logged_in? %>
+            <ol>
+              <li>ログイン中のユーザー：<%= current_user.name %>&nbsp;&nbsp;</li>
+              <li><%= link_to "Profile", user_path(current_user.id) %>&nbsp;</li>
+              <li><%= link_to "Logout ", session_path(current_user.id), method: :delete, data: { confirm: "ログアウトしますか?" }  %>&nbsp;</li>
+              <li><%= link_to "ユーザー管理画面", admin_users_path %></li>
+            </ol>
+          <% else %>
+          　<%= link_to "Sign up ", new_user_path %>
+            <%= link_to "Login ", new_session_path %>
+          <% end %>
         </div>
       </div>
     </nav>

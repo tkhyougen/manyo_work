@@ -1,13 +1,15 @@
 FactoryBot.define do
   factory :task do
-    name {"タイトルサンプル1"}
-    detail {"詳細サンプル1"}
+    name {"aaa"}
+    detail {"aaaaaa"}
     due {"2020-08-01"}
+    priority { 0 }
   end
 
-  factory :second_task, class:Task do
-    name {"タイトルサンプル2"}
-    detail{"詳細サンプル2"}
+  factory :second_task, class: Task do
+    name {"bbb"}
+    detail{"bbbbbb"}
     due {"2019-08-01"}
+    priority { 0 }
   end
 end

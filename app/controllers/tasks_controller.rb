@@ -5,37 +5,35 @@ class TasksController < ApplicationController
   PER = 5
 
   def index
-
-    # @q = Task.ransack(params[:q])
-    # @tasks = @q.result(distinct: true)
-    @tasks = Task.all.order(created_at:"DESC")
+    @tasks = current_user.tasks.order(created_at:"DESC")
 
     #終了期限で昇降ソート
     if params[:sort_expired_dsc]
-      @tasks = Task.all.order(due:"DESC")
+      @tasks = current_user.tasks.all.order(due:"DESC")
     elsif params[:sort_expired_asc]
-      @tasks = Task.all.order(due:"ASC")
+      @tasks = current_user.tasks.all.order(due:"ASC")
     else
-      @tasks = Task.all.order(created_at:"DESC")
+      @tasks = current_user.tasks.all.order(created_at:"DESC")
     end
 
     #優先度でソート
     if params[:sort_priority_high]
-      @tasks = Task.all.order(priority:"ASC")
+      @tasks = current_user.tasks.all.order(priority:"ASC")
     end
 
     #検索　タスクとステータス
     if params[:search].present?
       if params[:search][:name].present? && params[:search][:status].present?
-        @tasks = Task.where("name Like ?", "%#{params[:search][:name]}%")
+        @tasks = current_user.tasks.where("name Like ?", "%#{params[:search][:name]}%")
         @tasks = @tasks.where(status: params[:search][:status])
       elsif params[:search][:name].present?
-        @tasks = Task.where("name Like ?", "%#{params[:search][:name]}%")
+        @tasks = current_user.tasks.where("name Like ?", "%#{params[:search][:name]}%")
       elsif params[:search][:status].present?
         @tasks = @tasks.where(status: params[:search][:status])
       end
     end
 
+    #見直し
     @tasks = @tasks.page(params[:page]).per(PER)
   end
 
@@ -50,8 +48,8 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
-    # @task.user_id = current_user.id
+    @task = current_user.tasks.new(task_params)
+    @task.user_id = current_user.id
     if @task.save
       redirect_to @task, notice: 'Taskが作られました'
     else
@@ -78,7 +76,7 @@ class TasksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task
-      @task = Task.find(params[:id])
+      @task = current_user.tasks.find(params[:id])
     end
 
     def task_params
@@ -86,10 +84,10 @@ class TasksController < ApplicationController
     end
 
     def check_user
-        # unless logged_in?
-        #     flash[:notice] = "ログインしてください"
-        #     redirect_to new_session_path, notice:"ログインしてください"
-        # end
+      unless logged_in?
+        flash[:notice] = "ログインしてください"
+        redirect_to new_session_path, notice:"ログインしてください"
+      end
     end
 
 end

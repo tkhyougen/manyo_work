@@ -1,0 +1,33 @@
+<% if @user.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(user.errors.count, "件") %> エラーが発生しました:</h2>
+    <ul>
+    <% user.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+</br>
+<%= form_with(model: [:admin, @user], local: true) do |form| %>
+  <%= form.label :name, "名前" %>
+  <%= form.text_field :name, class:"form-control" %>
+
+  <%= form.label :email, "メールアドレス" %>
+  <%= form.text_field :email, class:"form-control" %>
+
+  <%= form.label :admin, class:"form-check-label" do %>
+  <%= form.check_box :admin, class:"form-check-input" %>
+    <a>管理者権限</a>
+  </br>
+  <%= form.label :password, "パスワード" %>
+  <%= form.password_field :password, class:"form-control" %>
+
+  <%= form.label :password_confirmation, "パスワード（確認）" %>
+  <%= form.password_field :password_confirmation, class:"form-control" %>
+
+  <%= form.submit "登録する", class:"btn btn-primary" %>
+
+  <% end %>
+<% end %>

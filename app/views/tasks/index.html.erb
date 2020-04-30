@@ -1,12 +1,11 @@
-<p id="notice"><%= notice %></p>
+
 
 <!--body -->
 <body>
-
   <div class="container-fluid">
     <div class="search">
       <div class="sort">
-        <% if params[:sort_expired_dsc]%>
+        <% if params[:sort_expired_dsc] %>
           <%= link_to "終了期限で昇順にソート", tasks_path(sort_expired_asc:true), :style=>"font-weight:bold" %>
         <% elsif params[:sort_expired_asc] %>
           <%= link_to "終了期限で降順にソート", tasks_path(sort_expired_dsc:true), :style=>"font-weight:bold" %>

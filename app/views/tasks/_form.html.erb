@@ -28,7 +28,7 @@
 
     <div class="priority">
       <%= form.label :優先度 %>
-      <%= form.select :priority, Task.priorities.keys.map{ |k| [k, k] } %>
+      <%= form.select :priority, Task.priorities.keys %>
     </div>
 
     <div class="status">

@@ -1,0 +1,16 @@
+
+[1mFrom:[0m /home/vagrant/workspace/manyo_work/app/controllers/tasks_controller.rb:57 TasksController#create:
+
+    [1;34m56[0m: [32mdef[0m [1;34mcreate[0m
+ => [1;34m57[0m:   binding.pry
+    [1;34m58[0m:   @task = current_user.tasks.new(task_params)
+    [1;34m59[0m:   @task.user_id = current_user.id
+    [1;34m60[0m: 
+    [1;34m61[0m:   [32mif[0m @task.save
+    [1;34m62[0m:     redirect_to @task, [35mnotice[0m: [31m[1;31m'[0m[31mTaskが作られました[1;31m'[0m[31m[0m
+    [1;34m63[0m:   [32melse[0m
+    [1;34m64[0m:     render [33m:new[0m
+    [1;34m65[0m:   [32mend[0m
+    [1;34m66[0m: 
+    [1;34m67[0m: [32mend[0m
+

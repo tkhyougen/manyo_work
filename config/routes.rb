@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :labels
   namespace :admin do
     resources :users
   end
@@ -7,4 +8,5 @@ Rails.application.routes.draw do
   resources :tasks
   resources :users
   resources :sessions
+  resources :midlabls, only:[:create,:destroy]
 end

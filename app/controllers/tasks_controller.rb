@@ -21,20 +21,42 @@ class TasksController < ApplicationController
       @tasks = current_user.tasks.all.order(priority:"ASC")
     end
 
-    #検索　タスクとステータス
-    if params[:search].present?
-      if params[:search][:name].present? && params[:search][:status].present?
-        @tasks = current_user.tasks.where("name Like ?", "%#{params[:search][:name]}%")
-        @tasks = @tasks.where(status: params[:search][:status])
-      elsif params[:search][:name].present?
-        @tasks = current_user.tasks.where("name Like ?", "%#{params[:search][:name]}%")
-      elsif params[:search][:status].present?
-        @tasks = @tasks.where(status: params[:search][:status])
-      end
-    end
+  #検索をかける場合分け
+  if params[:search].present?
+    if params[:search][:name].present? && params[:search][:status].present? && params[:search][:label_id].present?
+      @tasks = current_user.tasks.where("name Like ?", "%#{params[:search][:name]}%")
+      @tasks = @tasks.where(status: params[:search][:status])
+      @mid_label = Midlabel.where(label_id: params[:search][:label_id]).pluck(:task_id)
+      @tasks = @tasks.where(id: @mid_label)
 
-    #見直し
-    @tasks = @tasks.page(params[:page]).per(PER)
+    elsif params[:search][:name].present? && params[:search][:status].present?
+      @tasks = current_user.tasks.where("name Like ?", "%#{params[:search][:name]}%")
+      @tasks = @tasks.where(status: params[:search][:status])
+
+    elsif params[:search][:name].present? && params[:search][:label_id].present?
+      @tasks = current_user.tasks.where("name Like ?", "%#{params[:search][:name]}%")
+      @mid_label = Midlabel.where(label_id: params[:search][:label_id]).pluck(:task_id)
+      @tasks = @tasks.where(id: @mid_label)
+
+    elsif params[:search][:status].present? && params[:search][:label_id].present?
+      @tasks = @tasks.where(status: params[:search][:status])
+      @mid_label = Midlabel.where(label_id: params[:search][:label_id]).pluck(:task_id)
+      @tasks = @tasks.where(id: @mid_label)
+
+    elsif params[:search][:name].present?
+      @tasks = current_user.tasks.where("name Like ?", "%#{params[:search][:name]}%")
+
+    elsif params[:search][:status].present?
+      @tasks = @tasks.where(status: params[:search][:status])
+
+    elsif params[:search][:label_id].present?
+      @mid_label = Midlabel.where(label_id: params[:search][:label_id]).pluck(:task_id)
+      @tasks = @tasks.where(id: @mid_label)
+    end
+  end
+
+    #表示数をPERで5つに
+      @tasks = @tasks.page(params[:page]).per(PER)
   end
 
   def show
@@ -42,6 +64,7 @@ class TasksController < ApplicationController
 
   def new
     @task = Task.new
+    @labels = Label.all
   end
 
   def edit
@@ -49,7 +72,8 @@ class TasksController < ApplicationController
 
   def create
     @task = current_user.tasks.new(task_params)
-    @task.user_id = current_user.id
+    # @task.user_id = current_user.id  #不要
+
     if @task.save
       redirect_to @task, notice: 'Taskが作られました'
     else
@@ -80,7 +104,7 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.require(:task).permit(:name, :detail, :due,:priority, :status, :label)
+      params.require(:task).permit(:name, :detail, :due, :priority, :status, {label_ids: []} )
     end
 
     def check_user

@@ -40,6 +40,14 @@
       }%>
     </div>
 
+    <div class="labelling">
+      <%= form.label :ラベル %>
+      <!-- <div class="col-sm-10"> -->
+        <div class="form-inline">
+          <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) %>  <!--label_idsをパラメータとして飛ばす-->
+        </div>
+    </div>
+
     <div class="actions">
       <%= form.submit name="登録する", class: "btn-primary" %>
     </div>

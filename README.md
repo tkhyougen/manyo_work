@@ -1,4 +1,12 @@
 
+-これまでのステップの内容をherokuにpushし、エラーが出ないようにしましょう
+
+
+config/environments/development.rb
+config.consider_all_requests_local = falseに変更することでエラー画面表示
+
+
+
 User
   id
   name:string
@@ -52,3 +60,6 @@ https://reasonable-code.com/github-push-heroku/
 #### masterにマージしたらローカルを最新masterに
 `git checkout master`
 `git pull origin master`
+####　次のbranchを切るとき
+`git branch checkout -b ブランチ名`
+`git checkout ブランチ名`

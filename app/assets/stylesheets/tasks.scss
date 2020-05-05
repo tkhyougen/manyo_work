@@ -27,7 +27,7 @@ body{
 
 .search{
   margin:0px 0px;
-  height:70px;
+  height:100px;
 }
 
 .table_responsive{
@@ -42,11 +42,22 @@ body{
 }
 
 .format{
-  font-size:20px;
+  font-size:15px;
 }
 
 .button{
   font-size:20px;
+}
+
+.form-inline{
+  display: flex;
+  align-items: center;
+}
+.flex-inline{
+  padding-right: 5px;
+}
+.flex-inline:last-child{
+  margin-top: 15px;
 }
 
 footer{

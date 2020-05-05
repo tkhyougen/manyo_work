@@ -18,15 +18,26 @@
 
         <form class="form-inline">
           <%= form_with(scope: :search, url:tasks_path, local: true, method: :get) do |form| %>
+          <div class="flex-inline">
             <%= form.label :name_search, "タスク名" %>
             <%= form.text_field :name, class: "form-control" %>
-            <%= form.label :status_search, "ステータスで絞込" %>
+          </div>
+          <div class="flex-inline">
+            <%= form.label :status_search, "ステータス絞込" %>
             <%= form.select :status, ["未着手","着手中","完了"],{include_blank:"選択する"}, class:"simple" %>
             <%= form.hidden_field :search, value:"true" %>
-
+          </div>
+          <div class="flex-inline">
+            <%= form.label :label_id_search, "ラベル絞込" %>
+            <%= form.select("label_id", Label.all.pluck(:name, :id), { include_blank:"選択する",include_hidden: false }) %>
+              <!--label_idをパラメータ値として飛ばす pluckでlabelのidとnameを取り出す -->
+          </div>
+          <div class="flex-inline">
             <%= form.submit name="検索する" %>
+          </div>
           <% end %>
         </form>
+
     </div>
 
     <div class="table_responsive">
@@ -40,6 +51,7 @@
               <th scope="col">期限</th>
               <th scope="col">優先度  </th>
               <th scope="col">ステータス </th>
+              <th scope="col">ラベル</th>
               <th scope="col"></th>
               <th scope="col"></th>
               <th scope="col"></th>
@@ -55,6 +67,10 @@
                 <td><%= task.due %></td>
                 <td><%= task.priority %></td>
                 <td><%= task.status %></td>
+                <td><% task.labels.each do |label| %>
+                      <%= label.name %>
+                    <% end %>
+                </td>
                 <td><%= link_to '詳細', task_path(task), class:"btn btn-primary mr-3" %></td>
                 <td><%= link_to '編集', edit_task_path(task), class: "btn btn-success"%></td>
                 <td><%= link_to '削除', task, method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-danger" %></td>

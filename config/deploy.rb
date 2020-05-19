@@ -1,15 +1,13 @@
 # config valid only for current version of Capistrano
 lock '3.6.0'
-
 set :application, 'manyo_work'
 set :repo_url, 'https://github.com/tkhyougen/manyo_work.git'
-
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 set :branch, ENV['BRANCH'] || 'master'
 # Default deploy_to directory is /var/www/my_app_name
 # set :deploy_to, '/var/www/my_app_name'
-set :deploy_to, '/var/www/achieve'
+set :deploy_to, '/var/www/manyo_work'
 # Default value for :scm is :git
 # set :scm, :git
 set :linked_files, %w{.env config/secrets.yml}
@@ -24,11 +22,11 @@ set :rbenv_ruby, '2.6.5'
 set :rbenv_type, :system
 # Default value for :pty is false
 # set :pty, true
-set :log_level, :debug
+set :log_level, :info
 namespace :deploy do
   desc 'Restart application'
   task :restart do
-    invoke 'unicorn:restart'
+   invoke 'unicorn:restart'
   end
   desc 'Create database'
   task :db_create do

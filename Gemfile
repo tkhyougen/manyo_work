@@ -25,6 +25,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'pry-rails'
 
+gem "dotenv-rails"
+gem "unicorn"
+gem "mini_racer", platform: :ruby
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -37,9 +41,11 @@ group :development, :test do
   gem 'launchy'
 
 ####AWSに低追加
-  gem 'dotenv-rails' # 開発環境で環境変数を操作するのに必要
-  gem 'unicorn' # アプリケーションサーバのunicorn
-  gem 'mini_racer', platforms: :ruby# デプロイ時に必要
+  gem "capistrano", "3.6.0"
+  gem "capistrano-bundler"
+  gem "capistrano-rails"
+  gem "capistrano-rbenv"
+  gem "capistrano3-unicorn"
 ####
 end
 

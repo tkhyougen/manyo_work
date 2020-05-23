@@ -1,0 +1,15 @@
+current directory: /home/vagrant/workspace/manyo_work/vendor/bundle/ruby/2.6.0/gems/debug_inspector-0.0.3/ext/debug_inspector
+/home/vagrant/.rbenv/versions/2.6.5/bin/ruby -I /home/vagrant/.rbenv/versions/2.6.5/lib/ruby/2.6.0 -r ./siteconf20200523-15262-hhftrh.rb extconf.rb
+creating Makefile
+
+current directory: /home/vagrant/workspace/manyo_work/vendor/bundle/ruby/2.6.0/gems/debug_inspector-0.0.3/ext/debug_inspector
+make "DESTDIR=" clean
+
+current directory: /home/vagrant/workspace/manyo_work/vendor/bundle/ruby/2.6.0/gems/debug_inspector-0.0.3/ext/debug_inspector
+make "DESTDIR="
+compiling debug_inspector.c
+linking shared-object debug_inspector.so
+
+current directory: /home/vagrant/workspace/manyo_work/vendor/bundle/ruby/2.6.0/gems/debug_inspector-0.0.3/ext/debug_inspector
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 debug_inspector.so ./.gem.20200523-15262-1txq4gr
